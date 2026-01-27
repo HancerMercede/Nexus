@@ -1,0 +1,285 @@
+{
+   "Title":"Nexus.Store.BenchMark.Project.NexusStoreBenchmark-20260126-114609",
+   "HostEnvironmentInfo":{
+      "BenchmarkDotNetCaption":"BenchmarkDotNet",
+      "BenchmarkDotNetVersion":"0.15.8",
+      "OsVersion":"Windows 11 (10.0.26200.7623/25H2/2025Update/HudsonValley2)",
+      "ProcessorName":"AMD Ryzen 7 4800H with Radeon Graphics",
+      "PhysicalProcessorCount":1,
+      "PhysicalCoreCount":8,
+      "LogicalCoreCount":16,
+      "RuntimeVersion":".NET 10.0.2 (10.0.2, 10.0.225.61305)",
+      "Architecture":"X64",
+      "HasAttachedDebugger":false,
+      "HasRyuJit":true,
+      "Configuration":"RELEASE",
+      "DotNetCliVersion":"10.0.102",
+      "ChronometerFrequency":{
+         "Hertz":10000000
+      },
+      "HardwareTimerKind":"Unknown"
+   },
+   "Benchmarks":[
+      {
+         "DisplayInfo":"NexusStoreBenchmark.SetBatchAsync_Performance: DefaultJob [TotalRecords=1000]",
+         "Namespace":"Nexus.Store.BenchMark.Project",
+         "Type":"NexusStoreBenchmark",
+         "Method":"SetBatchAsync_Performance",
+         "MethodTitle":"SetBatchAsync_Performance",
+         "Parameters":"TotalRecords=1000",
+         "FullName":"Nexus.Store.BenchMark.Project.NexusStoreBenchmark.SetBatchAsync_Performance(TotalRecords: 1000)",
+         "HardwareIntrinsics":"AVX2+BMI1+BMI2+F16C+FMA+LZCNT+MOVBE,AVX,SSE3+SSSE3+SSE4.1+SSE4.2+POPCNT,X86Base+SSE+SSE2,AES+PCLMUL VectorSize=256",
+         "Statistics":{
+            "OriginalValues":[
+               2366245.3125,2458030.46875,2248337.5,2330448.828125,2263527.34375,2178712.109375,2227975.78125,2194870.3125,2260780.078125,2179374.21875,2244015.625,2156996.484375,2165288.671875,2134799.21875,2332501.953125,2130053.90625,2323674.21875,2194829.6875,2312742.1875,2290462.109375,2155035.15625,2228214.0625,2204960.546875,2160979.6875,2297062.5,2302225,2280486.328125,2218238.671875,2344548.046875,2214691.40625,2319864.84375,2205040.625,2453921.484375,2306058.203125,2197550.390625,2370525,2194719.140625,2163226.953125,2457076.171875,2237928.90625,2075755.859375,2237922.65625,2329310.15625,2384801.5625,2059810.546875,2254614.453125,2201544.53125,2296060.9375,2214423.4375,2216541.015625
+            ],
+            "N":50,
+            "Min":2059810.546875,
+            "LowerFence":2020492.822265625,
+            "Q1":2194839.84375,
+            "Median":2237925.78125,
+            "Mean":2251536.0859375,
+            "Q3":2311071.19140625,
+            "UpperFence":2485418.212890625,
+            "Max":2458030.46875,
+            "InterquartileRange":116231.34765625,
+            "LowerOutliers":[
+               
+            ],
+            "UpperOutliers":[
+               
+            ],
+            "AllOutliers":[
+               
+            ],
+            "StandardError":12752.892447668852,
+            "Variance":8131813289.090464,
+            "StandardDeviation":90176.56729489354,
+            "Skewness":0.3664461018021029,
+            "Kurtosis":2.8519520234398503,
+            "ConfidenceInterval":{
+               "N":50,
+               "Mean":2251536.0859375,
+               "StandardError":12752.892447668852,
+               "Level":12,
+               "Margin":44640.771697753786,
+               "Lower":2206895.3142397464,
+               "Upper":2296176.8576352536
+            },
+            "Percentiles":{
+               "P0":2059810.546875,
+               "P25":2194839.84375,
+               "P50":2237925.78125,
+               "P67":2295109.13671875,
+               "P80":2324801.40625,
+               "P85":2331783.359375,
+               "P90":2366673.28125,
+               "P95":2422817.51953125,
+               "P100":2458030.46875
+            }
+         },
+         "Memory":{
+            "Gen0Collections":52,
+            "Gen1Collections":19,
+            "Gen2Collections":6,
+            "TotalOperations":256,
+            "BytesAllocatedPerOperation":1119598
+         }
+      },{
+         "DisplayInfo":"NexusStoreBenchmark.GetAsync_Random_Performance: DefaultJob [TotalRecords=1000]",
+         "Namespace":"Nexus.Store.BenchMark.Project",
+         "Type":"NexusStoreBenchmark",
+         "Method":"GetAsync_Random_Performance",
+         "MethodTitle":"GetAsync_Random_Performance",
+         "Parameters":"TotalRecords=1000",
+         "FullName":"Nexus.Store.BenchMark.Project.NexusStoreBenchmark.GetAsync_Random_Performance(TotalRecords: 1000)",
+         "HardwareIntrinsics":"AVX2+BMI1+BMI2+F16C+FMA+LZCNT+MOVBE,AVX,SSE3+SSSE3+SSE4.1+SSE4.2+POPCNT,X86Base+SSE+SSE2,AES+PCLMUL VectorSize=256",
+         "Statistics":{
+            "OriginalValues":[
+               171934.1796875,159640.087890625,158036.6455078125,164300.48828125,160052.490234375,163786.5966796875,148199.31640625,149247.4853515625,149391.845703125,155357.9345703125,159265.283203125,148673.2421875,147718.4326171875,152098.0712890625,151826.123046875,148832.4462890625,163945.4345703125,172715.966796875,163315.72265625,159728.1982421875,149423.046875,164283.59375,166668.4326171875,156395.361328125,152079.833984375,151741.015625,147485.2783203125,160279.4677734375,149733.203125,148380.419921875,153405.37109375,154139.7216796875,155774.6337890625,158629.78515625,161932.6904296875,169845.0439453125,157322.3388671875,162023.92578125,149363.818359375,149169.3115234375,152418.45703125,160548.4130859375,152287.060546875,149173.4130859375,150195.9716796875,151813.4521484375,147958.69140625,151972.3876953125,153989.3310546875,163324.5849609375,148624.4873046875,167536.865234375,152356.0791015625,148686.5966796875,146583.8134765625,155332.03125,149510.15625,153843.115234375,154696.8994140625
+            ],
+            "N":59,
+            "Min":146583.8134765625,
+            "LowerFence":133269.64721679688,
+            "Q1":149407.4462890625,
+            "Median":153843.115234375,
+            "Mean":155542.2727423199,
+            "Q3":160165.97900390625,
+            "UpperFence":176303.77807617188,
+            "Max":172715.966796875,
+            "InterquartileRange":10758.53271484375,
+            "LowerOutliers":[
+               
+            ],
+            "UpperOutliers":[
+               
+            ],
+            "AllOutliers":[
+               
+            ],
+            "StandardError":884.6608079941312,
+            "Variance":46174859.96684891,
+            "StandardDeviation":6795.208603630128,
+            "Skewness":0.7237000109042708,
+            "Kurtosis":2.5233685137768886,
+            "ConfidenceInterval":{
+               "N":59,
+               "Mean":155542.2727423199,
+               "StandardError":884.6608079941312,
+               "Level":12,
+               "Margin":3066.525231075618,
+               "Lower":152475.7475112443,
+               "Upper":158608.79797339553
+            },
+            "Percentiles":{
+               "P0":146583.8134765625,
+               "P25":149407.4462890625,
+               "P50":153843.115234375,
+               "P67":158546.74560546875,
+               "P80":161969.1845703125,
+               "P85":163463.1884765625,
+               "P90":164286.97265625,
+               "P95":167767.68310546875,
+               "P100":172715.966796875
+            }
+         },
+         "Memory":{
+            "Gen0Collections":1,
+            "Gen1Collections":0,
+            "Gen2Collections":0,
+            "TotalOperations":4096,
+            "BytesAllocatedPerOperation":752
+         }
+      },{
+         "DisplayInfo":"NexusStoreBenchmark.SetBatchAsync_Performance: DefaultJob [TotalRecords=10000]",
+         "Namespace":"Nexus.Store.BenchMark.Project",
+         "Type":"NexusStoreBenchmark",
+         "Method":"SetBatchAsync_Performance",
+         "MethodTitle":"SetBatchAsync_Performance",
+         "Parameters":"TotalRecords=10000",
+         "FullName":"Nexus.Store.BenchMark.Project.NexusStoreBenchmark.SetBatchAsync_Performance(TotalRecords: 10000)",
+         "HardwareIntrinsics":"AVX2+BMI1+BMI2+F16C+FMA+LZCNT+MOVBE,AVX,SSE3+SSSE3+SSE4.1+SSE4.2+POPCNT,X86Base+SSE+SSE2,AES+PCLMUL VectorSize=256",
+         "Statistics":{
+            "OriginalValues":[
+               26836812.5,25140834.375,25428231.25,26807200,25636156.25,28081043.75,26978596.875,28243837.5,25820021.875,27394256.25,26287631.25,25654596.875,26381275,26125184.375,24904887.5,26310056.25,28427159.375,25059434.375,25747440.625,27129600,25911546.875,28185106.25,25493137.5,26601737.5,26800781.25,24467134.375,27140959.375,25563465.625,26571681.25,25824218.75,25542175,24481846.875,26013240.625,26343318.75,28360925,29382184.375,25210653.125,27731331.25,28120153.125,28729815.625,26248053.125,27495850,26801653.125,26438753.125,27285512.5,25576321.875,26628312.5,26941837.5,27571665.625,25226953.125,25059684.375,28742953.125,25620550,24812037.5,25444715.625,26453740.625,24876153.125,26168518.75,26984181.25
+            ],
+            "N":59,
+            "Min":24467134.375,
+            "LowerFence":23221814.84375,
+            "Q1":25569893.75,
+            "Median":26343318.75,
+            "Mean":26461815.519067798,
+            "Q3":27135279.6875,
+            "UpperFence":29483358.59375,
+            "Max":29382184.375,
+            "InterquartileRange":1565385.9375,
+            "LowerOutliers":[
+               
+            ],
+            "UpperOutliers":[
+               
+            ],
+            "AllOutliers":[
+               
+            ],
+            "StandardError":152467.22227844517,
+            "Variance":1371528978288.9834,
+            "StandardDeviation":1171122.956093417,
+            "Skewness":0.44056113329686636,
+            "Kurtosis":2.4171030778640135,
+            "ConfidenceInterval":{
+               "N":59,
+               "Mean":26461815.519067798,
+               "StandardError":152467.22227844517,
+               "Level":12,
+               "Margin":528501.5226219543,
+               "Lower":25933313.996445842,
+               "Upper":26990317.041689754
+            },
+            "Percentiles":{
+               "P0":24467134.375,
+               "P25":25569893.75,
+               "P50":26343318.75,
+               "P67":26832666.75,
+               "P80":27434893.75,
+               "P85":27836245,
+               "P90":28196852.5,
+               "P95":28457424.999999996,
+               "P100":29382184.375
+            }
+         },
+         "Memory":{
+            "Gen0Collections":83,
+            "Gen1Collections":33,
+            "Gen2Collections":13,
+            "TotalOperations":32,
+            "BytesAllocatedPerOperation":11468552
+         }
+      },{
+         "DisplayInfo":"NexusStoreBenchmark.GetAsync_Random_Performance: DefaultJob [TotalRecords=10000]",
+         "Namespace":"Nexus.Store.BenchMark.Project",
+         "Type":"NexusStoreBenchmark",
+         "Method":"GetAsync_Random_Performance",
+         "MethodTitle":"GetAsync_Random_Performance",
+         "Parameters":"TotalRecords=10000",
+         "FullName":"Nexus.Store.BenchMark.Project.NexusStoreBenchmark.GetAsync_Random_Performance(TotalRecords: 10000)",
+         "HardwareIntrinsics":"AVX2+BMI1+BMI2+F16C+FMA+LZCNT+MOVBE,AVX,SSE3+SSSE3+SSE4.1+SSE4.2+POPCNT,X86Base+SSE+SSE2,AES+PCLMUL VectorSize=256",
+         "Statistics":{
+            "OriginalValues":[
+               161102.4169921875,152457.2021484375,156983.0322265625,162343.1884765625,164162.353515625,192953.5888671875,186817.1142578125,184009.4970703125,181498.681640625,184991.50390625,181477.7099609375,181745.3369140625,181809.9365234375,186162.3291015625,185583.3984375,175328.41796875,182104.5166015625,187541.650390625,180038.9892578125,172292.3583984375,170774.2431640625,180679.8828125,181472.0458984375,184597.8759765625,170033.69140625,174845.0439453125,156842.8955078125,158378.61328125,157487.98828125,183902.5634765625,192552.44140625,182017.87109375,187974.0478515625,177083.5205078125,186495.556640625,180099.51171875,182590.771484375,181502.587890625,173927.3681640625,171551.9775390625,171827.6611328125,184324.755859375,177912.40234375,183314.4775390625,180060.2783203125,171483.1298828125,152722.607421875,162021.3134765625,152477.587890625,151213.37890625,161587.109375,155407.861328125,156363.6962890625,151486.9140625,176654.9560546875,171730.6884765625,170965.8935546875,163690.13671875,160391.4794921875,162658.984375,159590.3564453125,165670.3857421875,163896.630859375,163600.3662109375,151287.7685546875,154797.4853515625,164610.5224609375,161890.7470703125,160259.130859375,161344.482421875,162486.62109375,175710.7421875,176248.8525390625,185320.41015625,178360.498046875,162976.416015625,171417.529296875,160334.3505859375,161118.798828125,154992.8955078125,156732.0556640625,174255.2978515625,169239.794921875,169492.578125,166576.8310546875,156599.658203125,153133.544921875,157264.6728515625,166645.9716796875,172434.6923828125,175275.68359375,169416.6259765625,163129.58984375,185741.89453125,177070.3369140625,167144.384765625,194828.7109375,176026.1474609375,177767.2119140625,211342.138671875
+            ],
+            "N":100,
+            "Min":151213.37890625,
+            "LowerFence":131591.7022705078,
+            "Q1":161526.45263671875,
+            "Median":171517.5537109375,
+            "Mean":171305.41845703125,
+            "Q3":181482.95288085938,
+            "UpperFence":211417.7032470703,
+            "Max":211342.138671875,
+            "InterquartileRange":19956.500244140625,
+            "LowerOutliers":[
+               
+            ],
+            "UpperOutliers":[
+               
+            ],
+            "AllOutliers":[
+               
+            ],
+            "StandardError":1206.063620864957,
+            "Variance":145458945.7573891,
+            "StandardDeviation":12060.63620864957,
+            "Skewness":0.2885886387808058,
+            "Kurtosis":2.6954096644218395,
+            "ConfidenceInterval":{
+               "N":100,
+               "Mean":171305.41845703125,
+               "StandardError":1206.063620864957,
+               "Level":12,
+               "Margin":4090.399540182252,
+               "Lower":167215.018916849,
+               "Upper":175395.8179972135
+            },
+            "Percentiles":{
+               "P0":151213.37890625,
+               "P25":161526.45263671875,
+               "P50":171517.5537109375,
+               "P67":177815.12475585938,
+               "P80":182035.2001953125,
+               "P85":184056.78588867188,
+               "P90":185599.248046875,
+               "P95":187563.27026367188,
+               "P100":211342.138671875
+            }
+         },
+         "Memory":{
+            "Gen0Collections":1,
+            "Gen1Collections":0,
+            "Gen2Collections":0,
+            "TotalOperations":4096,
+            "BytesAllocatedPerOperation":752
+         }
+      }
+   ]
+}
