@@ -56,7 +56,7 @@ builder.Services.AddNexusStore(options => {
 Inject the engine into your services:
 
 ```csharp
-public class DataService(NexusEngine store)
+public class DataService(INexusEngine store)
 {
     public async Task ProcessData(string key, MyData data)
     {
