@@ -1,15 +1,16 @@
-﻿
+﻿using System.Buffers;
 using Garnet;
 using StackExchange.Redis;
 using MessagePack;
 using Microsoft.Extensions.Logging;
+using Nexus.Store.Contract;
 
 namespace Nexus.Store;
 
 /// <summary>
 /// The core engine of Nexus.Store that encapsulates Garnet and MessagePack.
 /// </summary>
-public class NexusEngine : IDisposable
+public class NexusEngine : INexusEngine
 {
     private readonly GarnetServer _server;
     private readonly ConnectionMultiplexer _redis;
@@ -43,11 +44,12 @@ public class NexusEngine : IDisposable
             "--port", options.Port.ToString(),
             "--memory", options.MemoryLimit,
             "--index", options.IndexSize,
+            "--aof",
+            "--recover",
             "--storage-tier",
             "--checkpointdir", checkpointDir,
             "--logdir", logDir
         };
-
         try
         {
             _server = new GarnetServer(garnetArgs);
@@ -83,7 +85,30 @@ public class NexusEngine : IDisposable
         byte[] data = MessagePackSerializer.Serialize(value);
         await _db.StringSetAsync(key, data);
     }
+    /// <summary>
+    /// Sets a value in the store associated with the specified key.
+    /// </summary>
+    /// <typeparam name="T">The type of the value to store.</typeparam>
+    /// <param name="key">The unique identifier for the stored item.</param>
+    /// <param name="value">The object to serialize and store.</param>
+    /// <param name="expiry">Optional expiration time. If null, the item persists indefinitely (or until manual eviction).</param>
+    /// <returns>A task representing the asynchronous operation.</returns>
+    public async Task SetAsync<T>(string key, T value, TimeSpan? expiry = null)
+    {
+        // Serialize the object to a high-performance binary format using MessagePack
+        byte[] serializedData = MessagePackSerializer.Serialize(value);
 
+        // If an expiry is provided, we use the TTL (Time To Live) feature of the underlying engine
+        if (expiry.HasValue)
+        {
+            await _db.StringSetAsync(key, serializedData, expiry.Value);
+        }
+        else
+        {
+            // Stores the data permanently in the primary or tiered storage
+            await _db.StringSetAsync(key, serializedData);
+        }
+    }
     /// <summary>
     /// Retrieves an object and deserializes it.
     /// </summary>
@@ -105,11 +130,17 @@ public class NexusEngine : IDisposable
     {
         CheckDisposed();
         var batch = _db.CreateBatch();
+        var writer = new ArrayBufferWriter<byte>(1024 * 4);
         
         foreach (var item in items)
         {
             _monitor.RecordOp();
-            byte[] data = MessagePackSerializer.Serialize(item.Value);
+            writer.Clear();
+            
+            MessagePackSerializer.Serialize(writer, item.Value);
+            
+            byte[] data = writer.WrittenSpan.ToArray();
+            
             _ = batch.StringSetAsync(item.Key, data);
         }
         
