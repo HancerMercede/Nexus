@@ -154,7 +154,128 @@ public class NexusEngine : INexusEngine
     public async Task<bool> RemoveAsync(string key)
     {
         CheckDisposed();
+        await RemoveTagAssociationsAsync(key);
         return await _db.KeyDeleteAsync(key);
+    }
+
+    /// <summary>
+    /// Saves an object with associated tags for cache invalidation.
+    /// </summary>
+    public async Task SetAsync<T>(string key, T value, IEnumerable<string> tags)
+    {
+        CheckDisposed();
+        _monitor.RecordOp();
+        
+        byte[] data = MessagePackSerializer.Serialize(value);
+        await _db.StringSetAsync(key, data);
+        await RegisterTagsAsync(key, tags);
+    }
+
+    /// <summary>
+    /// Saves an object with associated tags and optional expiration.
+    /// </summary>
+    public async Task SetAsync<T>(string key, T value, IEnumerable<string> tags, TimeSpan? expiry = null)
+    {
+        CheckDisposed();
+        _monitor.RecordOp();
+        
+        byte[] data = MessagePackSerializer.Serialize(value);
+        
+        if (expiry.HasValue)
+        {
+            await _db.StringSetAsync(key, data, expiry.Value);
+        }
+        else
+        {
+            await _db.StringSetAsync(key, data);
+        }
+        
+        await RegisterTagsAsync(key, tags);
+    }
+
+    /// <summary>
+    /// Invalidates all cache entries associated with the specified tag.
+    /// </summary>
+    public async Task<long> InvalidateByTagAsync(string tag)
+    {
+        CheckDisposed();
+        string tagKey = GetTagKey(tag);
+        
+        var keys = await _db.SetMembersAsync(tagKey);
+        if (keys.Length == 0) return 0;
+        
+        var keysToDelete = keys.Select(k => (RedisKey)k.ToString()).ToArray();
+        await _db.KeyDeleteAsync(keysToDelete);
+        await _db.KeyDeleteAsync(tagKey);
+        
+        return keys.Length;
+    }
+
+    /// <summary>
+    /// Invalidates all cache entries associated with any of the specified tags.
+    /// </summary>
+    public async Task<long> InvalidateByTagsAsync(IEnumerable<string> tags)
+    {
+        CheckDisposed();
+        var tagList = tags.ToList();
+        long totalInvalidated = 0;
+        
+        var deletedKeys = new HashSet<RedisValue>();
+        
+        foreach (var tag in tagList)
+        {
+            string tagKey = GetTagKey(tag);
+            var keys = await _db.SetMembersAsync(tagKey);
+            
+            foreach (var key in keys)
+            {
+                if (deletedKeys.Add(key))
+                {
+                    await _db.KeyDeleteAsync(key.ToString());
+                    totalInvalidated++;
+                }
+            }
+            
+            await _db.KeyDeleteAsync(tagKey);
+        }
+        
+        return totalInvalidated;
+    }
+
+    /// <summary>
+    /// Gets all keys associated with a specific tag.
+    /// </summary>
+    public async Task<IEnumerable<string>> GetKeysByTagAsync(string tag)
+    {
+        CheckDisposed();
+        string tagKey = GetTagKey(tag);
+        var keys = await _db.SetMembersAsync(tagKey);
+        return keys.Select(k => k.ToString());
+    }
+
+    private string GetTagKey(string tag) => $"__tag:{tag}__";
+
+    private async Task RegisterTagsAsync(string key, IEnumerable<string> tags)
+    {
+        foreach (var tag in tags)
+        {
+            string tagKey = GetTagKey(tag);
+            await _db.SetAddAsync(tagKey, key);
+        }
+    }
+
+    private async Task RemoveTagAssociationsAsync(string key)
+    {
+        var tagKeys = _db.Multiplexer.GetServer(_db.Multiplexer.GetEndPoints()[0])
+            .Keys(pattern: "__tag:*__")
+            .Select(k => k.ToString());
+        
+        var tasks = new List<Task>();
+        foreach (var tagKey in tagKeys)
+        {
+            tasks.Add(_db.SetRemoveAsync(tagKey, key));
+        }
+        await Task.WhenAll(tasks);
     }
 
     private void CheckDisposed()
